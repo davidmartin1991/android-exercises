@@ -10,6 +10,9 @@ import android.widget.Button
 
 class LibraryActivity : AppCompatActivity() {
 
+    companion object {
+        const val BOOK = "BOOK"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
@@ -23,6 +26,7 @@ class LibraryActivity : AppCompatActivity() {
         openButton.setOnClickListener { v ->
             val intent = Intent(this@LibraryActivity, BookActivity::class.java)
             // TODO add parcel book to intent
+            intent.putExtra(BOOK,book)
             startActivity(intent)
         }
     }
