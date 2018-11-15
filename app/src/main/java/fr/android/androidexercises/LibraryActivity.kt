@@ -1,5 +1,6 @@
 package fr.android.androidexercises
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -21,12 +22,15 @@ class LibraryActivity : AppCompatActivity() {
 
         openButton.setOnClickListener {
             // TODO replace with startActivityForResult() to start BookActivity
-            Toast.makeText(this@LibraryActivity, R.string.toast_todo, Toast.LENGTH_SHORT).show()
+            startActivityForResult(Intent(this,BookActivity::class.java),50)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // TODO get back book name
+        if(requestCode == 50)
+            if(resultCode == Activity.RESULT_OK)
+                Toast.makeText(this@LibraryActivity, data?.getStringExtra("name"), Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
