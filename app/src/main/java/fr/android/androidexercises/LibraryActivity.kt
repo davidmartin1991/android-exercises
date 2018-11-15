@@ -20,14 +20,24 @@ class LibraryActivity : AppCompatActivity() {
         checkBox = findViewById(R.id.checkBox)
     }
 
+    companion object {
+        const val key = "checkBox"
+    }
+
     public override fun onSaveInstanceState(outState: Bundle) {
         // TODO save check box state
+        checkBox?.apply {
+            outState.putBoolean(key, isChecked)
+        }
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        // TODO restore check box
+                // TODO restore check box
+        checkBox?.apply {
+            isChecked = savedInstanceState[key] as Boolean
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,7 +51,6 @@ class LibraryActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-
         return when (id) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
