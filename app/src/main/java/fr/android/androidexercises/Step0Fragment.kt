@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import java.lang.Exception
 
 class Step0Fragment : Fragment() {
 
@@ -16,11 +17,14 @@ class Step0Fragment : Fragment() {
     }
 
     private val textView: TextView? = null
-    private val listener: OnNextStep0Listener? = null
+    private var listener: OnNextStep0Listener? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        // TODO cast context to listener
+        when(context){
+            is OnNextStep0Listener -> listener = context
+            else -> throw Exception("...")
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,9 +33,9 @@ class Step0Fragment : Fragment() {
         // TODO find TextView and set text
 
         // TODO find Button and set listener
-        val nextButton: Button
+        val nextButton: Button = view.findViewById(R.id.nextButton)
         nextButton.setOnClickListener {
-            // TODO call listener
+            listener?.onNext()
         }
 
         return view
@@ -39,10 +43,13 @@ class Step0Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val text: TextView = view.findViewById(R.id.textView)
         // TODO setText(STEP_0)
+        text.text = STEP_0
     }
 
-    interface OnNextStep0Listener// TODO add onNext() method
+    interface OnNextStep0Listener{
+        fun onNext()
+    }// TODO add onNext() method
 
 }
