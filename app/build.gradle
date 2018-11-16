@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
+    testImplementation ('junit:junit:4.12',"io.mockk:mockk:1.8.13",'org.amshove.kluent:kluent-android:1.42')
     implementation(
             "com.android.support:appcompat-v7:$support_version",
             "com.android.support:design:$support_version",
